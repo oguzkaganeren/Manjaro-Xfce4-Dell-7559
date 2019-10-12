@@ -25,7 +25,9 @@ Edit power Settings.
 
 Remove drop-down from Ctrl+Alt+T shortkey xfce4-terminal.
 
-sudo pacman -S compton polybar rofi
+sudo pacman -S polybar rofi
+
+yay -S compton-tryone-git
 
 Then click ‘Window Manager Tweaks’, then the ‘Compositor’ tab, and un-tick the ‘Enable Display Compositing’ box:
 
