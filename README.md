@@ -37,3 +37,12 @@ Add shortkey super key `rofi -show drun`
 
 
 sudo nano /etc/lightdm/lightdm.conf edit greeter-session=lightdm-webkit2-greeter
+
+https://store.kde.org/p/1286856/
+
+
+yay -S candy-icons-git
+
+git clone https://github.com/EliverLara/firefox-sweet-theme/ && cd firefox-sweet-theme
+./scripts/install.sh -g
+
