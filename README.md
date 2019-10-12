@@ -32,3 +32,6 @@ Then click ‘Window Manager Tweaks’, then the ‘Compositor’ tab, and un-ti
 Go Settings Manager > Session and Start > Auto Start then add compton command `compton --shadow-exclude '!focused' --xrender-sync-fence --vsync`
 
 Add shortkey super key `rofi -show drun`
+
+
+sudo nano /etc/lightdm/lightdm.conf edit greeter-session=lightdm-webkit2-greeter
