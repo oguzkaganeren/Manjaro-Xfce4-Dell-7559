@@ -57,7 +57,8 @@ Set shortkey;
 betterlockscreen -l dim
 ```
 
-**Reset all keyboard shortcut(optionally)**
+**Reset all keyboard shortcut Settings  →  Keyboard  (optionally)**
+**Change show desktop shortcut Settings  →  Window Manager  →  Keyboard  → Show Desktop**
 ### Dual-boot Wrong time problem
 ```
 timedatectl set-local-rtc 1 --adjust-system-clock
