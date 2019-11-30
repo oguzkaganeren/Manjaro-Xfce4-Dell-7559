@@ -50,7 +50,7 @@ yay -S materia-theme opera chromium ttf-font-awesome ttf-font-awesome-4 ttf-robo
 sudo pacman -Rns light-locker
 yay -S betterlockscreen
 cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc ~/.config
-betterlockscreen -u /usr/share/backgrounds/gnome/adwaita-day.jpg
+betterlockscreen -u /usr/share/backgrounds/wallpapers-2018/palm-wave.jpg
 ```
 Set shortkey;
 ```
