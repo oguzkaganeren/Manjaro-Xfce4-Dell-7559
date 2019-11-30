@@ -56,8 +56,12 @@ Set shortkey;
 ```
 betterlockscreen -l dim
 ```
-
+`Right click -> properties` on whisker menu(manjaro icon at bottom-left of the screen). Change lock screen command with `betterlockscreen -l dim` at Commands tab.
 **Reset all keyboard shortcut Settings  →  Keyboard  (optionally)**
+Add super key whiskermenu
+```
+xfce4-popup-whiskermenu
+```
 **Change show desktop shortcut Settings  →  Window Manager  →  Keyboard  → Show Desktop**
 ### Dual-boot Wrong time problem
 ```
