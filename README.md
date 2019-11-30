@@ -1,45 +1,126 @@
 # Manjaro-Xfce4-Dell-7559
-sudo pacman -Sy
-sudo pacman -S yay
-yay -S lightdm-webkit2-theme-sapphire
+You can download it [here](https://manjaro.org/download/official/xfce/) and prepare bootable disk with [rufus](https://rufus.akeo.ie/) (with DD mode) or if you are on linux, you can use etcher, DD, imagewriter etc..
 
-Setup Theme
+After that, reboot your computer and when you see the dell logo, you should press F2 and disable boot secure in boot section, then close the bios with F10(Yes). Again at the dell logo, you should press F12 and select your bootable disk. Then you see that Manjaro boot menu, select Boot:Manjaro Linux. 
 
-To set the lightdm-theme-sapphire as default theme for login by modifying lightdm-webkit2-greeter.conf, located at
+Now, you can start the installiation. Follow the steps in the Manjaro User Guide. You can download [Manjaro User Guide](https://manjaro.org/support/userguide/) or find your on live manjaro system.
+**After the installation, reboot your system. Press e when you see Manjaro Grub Screen(It appears if your system is dual-boot otherwise you should keep pressing shift button to show grub screen)**
+then add the line after `quiet` word.
+```acpi_osi=! acpi_osi="Windows 2009" ``` 
 
-/etc/lightdm/lightdm-webkit2-greeter.conf
+```
+sudo nano /etc/default/grub 
+```
+> GRUB_CMDLINE_LINUX_DEFAULT="quiet acpi_osi=! acpi_osi=\"Windows 2009\" acpi_backlight=vendor"
 
-Modify [greeter] section and set
+```
+sudo update-grub
+```
 
-webkit_theme = lightdm-theme-sapphire
+### Fastest pacman
+```
+sudo pacman-mirrors --fasttrack 5
+```
+### Update Your System
+```
+sudo pacman -Syu
+```
 
 
+
+### Packages I use
+```
+sudo pacman -S yay aria2 speedtest-cli telegram-desktop kdenlive inkscape create_ap virtualbox fish flameshot deepin-terminal neofetch gtop kolourpaint gedit
+```
+### Change the bash shell to fish
+```
+chsh -s /usr/bin/fish
+curl -L https://get.oh-my.fish | fish
+omf install bobthefish
+```
+## Customize shell and terminal
+Change `.config/fish/conf.d/omf.fish` with [this](https://github.com/oguzkaganeren/manjaro-cinnamon-dell-7559/blob/master/.config/fish/omf.fish)
+Set default deepin terminal then open it. Right click on the terminal and switch theme `argonaut`.
+### Aur Packages I use
+```
+yay -S materia-theme opera chromium ttf-font-awesome ttf-font-awesome-4 ttf-roboto android-studio woeusb-git jdownloader2 ttf-ms-fonts vscodium-bin breeze-blurred-git otf-san-francisco xdman gwe svr zettlr-bin fslint waterfox-bin odio-appimage skypeforlinux-stable-bin posy-cursors all-repository-fonts
+```
+### Change light-locker with betterlockscreen(optinal)
+```
 sudo pacman -Rns light-locker
 yay -S betterlockscreen
 cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc ~/.config
 betterlockscreen -u /usr/share/backgrounds/gnome/adwaita-day.jpg
-
+```
 Set shortkey;
+```
 betterlockscreen -l dim
-Edit power Settings.
+```
 
-Remove drop-down from Ctrl+Alt+T shortkey xfce4-terminal.
+**Reset all keyboard shortcut(optionally)**
+### Dual-boot Wrong time problem
+```
+timedatectl set-local-rtc 1 --adjust-system-clock
+```
+### Adblock Spotify
+```
+yay -S --mflags --skipinteg --needed spotify spotify-adblock
+```
 
-sudo pacman -S polybar rofi
+### SSD
+>  :exclamation: If you have a SSD, you should enable fstrim.
 
-yay -S compton-tryone-git
+```
+sudo systemctl enable fstrim.timer
+```
+### If skype not run
+```
+sudo sysctl kernel.unprivileged_userns_clone=1
+```
+### If headphones not detected when restart (after startup not working, I am working on it )
+```
+sudo nano /etc/pulse/default.pa
+```
+at the bottom under `### Make some devices default` put
+```
+set-default-sink 1
+```
+## Nvidia Options
+**There are many options for installing nvidia driver. Follow the [link](https://forum.manjaro.org/t/options-for-nvidia-optimus-graphics/75185)**
 
-Then click ‘Window Manager Tweaks’, then the ‘Compositor’ tab, and un-tick the ‘Enable Display Compositing’ box:
+### Open Wifi Hotspot
+```
+sudo create_ap wlp5s0 wlp5s0 MyAccessPoint password
+```
 
-Go Settings Manager > Session and Start > Auto Start then add compton command `compton --shadow-exclude '!focused' --xrender-sync-fence --vsync`
+#### Libre Office icon;
+```
+yay -S papirus-libreoffice-theme
+```
+After that;
+LibreOffice->tools->options->View->Icon Style->Papirus
+### For Other Partitations
+If you have another partition(E, D etc.). You can mount it on the startup. Thus some applications which are using other partitions don't get an error.
 
-Add shortkey super key `rofi -show drun`
+```
+lsblk -f
+```
+The command shows your disks uuid.
+```
+sudo gedit /etc/fstab 
+```
+Open your fstab config with the command. You should add codes similar to the following example. You should change UUID and /run/media/yourUserName/Partition.
+```
+UUID=b336b98e-d0b5-4254-b6aa-9e66f85b0dfc /run/media/oguz/Files ext4 defaults  0 0
+```
 
-
-sudo nano /etc/lightdm/lightdm.conf edit greeter-session=lightdm-webkit2-greeter
-
-https://store.kde.org/p/1286856/
-
+>  :exclamation: If you use manjaro with dual boot, you should close fast-startup,hibarnate on your Windows, otherwise, you have not a write permission for other partitions.
+#### For Android Studio(KVM);
+```
+sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netcat
+sudo systemctl enable libvirtd.service
+sudo systemctl start libvirtd.service
+```
 
 yay -S candy-icons-git
 
