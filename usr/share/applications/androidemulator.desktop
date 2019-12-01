@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Android Emulator
+Icon=android-studio
+Exec=/run/media/oguz/Files/Programs/openEmulatorWithBatFile/android.sh %U
+Terminal=false
+Categories=Development;
